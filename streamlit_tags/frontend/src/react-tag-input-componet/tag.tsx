@@ -4,6 +4,7 @@ import cc from "./classnames";
 
 interface TagProps {
   text: string;
+  color: string;
   remove: any;
 }
 
@@ -29,15 +30,15 @@ const tagStyles = css({
   },
 });
 
-export default function Tag({ text, remove }: TagProps) {
+export default function Tag({ text, color, remove }: TagProps) {
   const handleOnRemove = (e: { stopPropagation: () => void; }) => {
     e.stopPropagation();
     remove(text);
   };
 
   return (
-    <span className={cc("rti--tag", tagStyles)}>
-      <span>{text}</span>
+    <span className={cc("rti--tag", tagStyles)} style={{backgroundColor: color}}>
+      <span dangerouslySetInnerHTML={{ __html: text }}/>
       <button
         type="button"
         onClick={handleOnRemove}

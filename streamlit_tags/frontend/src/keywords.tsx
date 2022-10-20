@@ -1,4 +1,4 @@
-import React,{ useEffect, useState }  from "react"
+import React,{ useEffect, useState, ReactElement, ReactNode }  from "react"
 import { ComponentProps, Streamlit, withStreamlitConnection } from "streamlit-component-lib"
 import { TagsInput } from "./react-tag-input-componet";
 import "./styles.css";
@@ -6,15 +6,16 @@ import "./styles.css";
 interface PythonArgs {
   label: string
   text: string
+  color: string
   initialValue: string[]
   suggestions: string[]
   maxTags: number
 }
 
-const Custom_keywords = (props: ComponentProps) => {
+const Custom_keywords = (props: ComponentProps):ReactElement => {
   // Destructure using Typescript interface
   // This ensures typing validation for received props from Python
-  let { label, text, initialValue, suggestions, maxTags}: PythonArgs = props.args
+  let { label, text, color, initialValue, suggestions, maxTags}: PythonArgs = props.args
   const [value, setValue] = useState(initialValue)
 
   const onSubmit = (values: string[]) => {
@@ -26,6 +27,7 @@ const Custom_keywords = (props: ComponentProps) => {
     <div>
         <TagsInput
         value={value}
+        color={color}
         onChange= {(value) =>  onSubmit(value)}
         name={label}
         placeHolder={text}

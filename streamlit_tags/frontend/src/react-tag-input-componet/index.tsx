@@ -16,6 +16,7 @@ export interface TagsInputProps {
   name?: string;
   placeHolder?: string;
   value: string[];
+  color: string;
   onChange?: (tags: string[]) => void;
   suggestions: Array<string> | Array<IHintOption>;
   onBlur?: any;
@@ -36,6 +37,14 @@ const RTIContainer = css({
   "--rtiS": "0.5rem",
   "--rtiTag": "#edf2f7",
   "--rtiTagRemove": "#e53e3e",
+  '--rti-bg': '#fff',
+  '--rti-border': '#ccc',
+  '--rti-main': '#3182ce',
+  '--rti-radius': '0.375rem',
+  '--rti-s': '0.5rem',
+  '--rti-tag': '#edf2f7',
+  '--rti-tag-remove': '#e53e3e',
+
 
   "*": {
     boxSizing: "border-box",
@@ -72,6 +81,7 @@ export const TagsInput = ({
   name,
   placeHolder,
   value,
+  color,
   onChange,
   onBlur,
   separators,
@@ -120,7 +130,7 @@ export const TagsInput = ({
   return (
     <div aria-labelledby={name} className={cc("rti--container", RTIContainer)}>
       {tags.map(tag => (
-        <Tag key={tag} text={tag} remove={onTagRemove} />
+        <Tag key={tag} text={tag} color={color} remove={onTagRemove} />
       ))}
 
       <Hint options={suggestions} allowTabFill={true}>
